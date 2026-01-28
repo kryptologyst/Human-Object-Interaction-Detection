@@ -1,0 +1,48 @@
+# HICO-DET Dataset Configuration
+data:
+  name: "hico_det"
+  root: "data/hico_20160224_det"
+  train_split: "train"
+  val_split: "val"
+  test_split: "test"
+  num_classes: 80
+  num_interactions: 600
+
+# Model Configuration
+model:
+  name: "hoi_detector"
+  backbone: "resnet50"
+  pretrained: true
+  hidden_dim: 256
+  dropout: 0.1
+
+# Training Configuration
+training:
+  batch_size: 8
+  num_epochs: 100
+  learning_rate: 1e-4
+  weight_decay: 1e-4
+  scheduler_step_size: 30
+  scheduler_gamma: 0.1
+  save_interval: 10
+  val_interval: 5
+  use_wandb: false
+  checkpoint_dir: "checkpoints"
+
+# Data Augmentation
+augmentation:
+  horizontal_flip: 0.5
+  vertical_flip: 0.0
+  rotation: 15
+  brightness_contrast: 0.2
+  hue_saturation: 0.1
+
+# Evaluation Configuration
+evaluation:
+  score_threshold: 0.5
+  nms_threshold: 0.5
+  max_detections: 100
+
+# Device Configuration
+device: "auto"  # auto, cuda, mps, cpu
+seed: 42
